@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 from efficient_llm_serving.dependencies import require_torch
 from efficient_llm_serving.generation import greedy_next_token_with_past
