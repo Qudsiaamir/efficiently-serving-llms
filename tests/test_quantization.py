@@ -1,11 +1,14 @@
 import pytest
 
 from efficient_llm_serving.dependencies import require_torch
+from efficient_llm_serving.quantization import (
+    dequantize_tensor,
+    quantize_tensor,
+    tensor_size_bytes,
+)
 
 
 torch = pytest.importorskip("torch")
-
-from efficient_llm_serving.quantization import dequantize_tensor, quantize_tensor, tensor_size_bytes
 
 
 def test_quantize_dequantize_tensor_round_trip_shape_and_dtype():
