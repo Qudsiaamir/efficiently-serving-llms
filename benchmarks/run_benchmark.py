@@ -11,12 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
-
-from efficient_llm_serving.benchmarking import LatencySummary, time_callable
+from efficient_llm_serving.benchmarking import time_callable
 from efficient_llm_serving.config import BenchmarkConfig
 from efficient_llm_serving.dependencies import require_torch
 from efficient_llm_serving.lora import build_multi_lora_model, generate_toy_token
@@ -35,7 +30,7 @@ def run_multi_lora_benchmark(strategy: str, config: BenchmarkConfig) -> list[dic
         input_ids = torch.randint(config.vocab_size, (batch_size, config.seq_len), dtype=torch.long)
         lora_indices = torch.randint(config.num_loras, (batch_size,), dtype=torch.long)
 
-        def generate_once() -> None:
+        def generate_once(input_ids=input_ids, lora_indices=lora_indices) -> None:
             generate_toy_token(
                 model,
                 input_ids=input_ids,
