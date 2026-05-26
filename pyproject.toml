@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "efficiently-serving-llms"
+version = "0.1.0"
+description = "Production-oriented examples for efficient LLM serving mechanics and benchmarking."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Mohammed"}]
+keywords = ["llm", "mlops", "inference", "lora", "batching", "benchmarking"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.4.0",
+]
+ml = [
+  "torch>=2.2",
+  "transformers>=4.40",
+  "numpy>=1.26",
+  "matplotlib>=3.8",
+  "tqdm>=4.66",
+]
+serving = [
+  "pydantic>=2.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
